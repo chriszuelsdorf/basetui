@@ -10,6 +10,13 @@ Here are a few of the features incorporated.
 - Built-in basic logging
 - Color customization
 
+## How to Install
+Use pip to install directly from Github:
+
+```sh
+python3 -m pip install git+https://github.com/chriszuelsdorf/basetui
+```
+
 ## How to use
 
 A short example:
