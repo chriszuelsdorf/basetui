@@ -17,3 +17,10 @@ Now that the niceties are out of the way and you've decided the new version numb
 - Update the changelog
 
 Once it's in waiting, merge the branch to master!
+
+## Testing issue fixes locally
+
+Navigate to the base folder (the directory containing `setup.py`) then run the following:
+```sh
+python3 -m pip install .
+```
