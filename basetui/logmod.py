@@ -6,7 +6,7 @@ class logbuf:
     valid_levels = [0, 1, 2, 3]
 
     def __init__(self, file, filter=2):
-        """Init
+        """Init the logbuf.
 
         Args:
             file (str): The filepath to use. Will be deleted during init.
@@ -23,6 +23,15 @@ class logbuf:
         self.buffer = []
 
     def log(self, text, priority=2):
+        """Log a message at a given priority.
+
+        Args:
+            text (str): the text to log
+            priority (int, optional): The log message priority. Defaults to 2.
+
+        Raises:
+            ValueError: If priority is invalid
+        """
         if priority not in self.valid_levels:
             raise ValueError(f"Expected priority, got {priority}")
         if priority >= self.filter:
@@ -31,6 +40,7 @@ class logbuf:
             self.flush()
 
     def flush(self) -> None:
+        """Flushes messages in the log buffer to the output file."""
         self.buffer.append(str(datetime.now()) + " -> LOGBUF <> Flushed Log Buffer")
         with open(self.file, mode="a") as f:
             for l in self.buffer:
