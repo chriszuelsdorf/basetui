@@ -17,6 +17,12 @@ Use pip to install directly from Github:
 python3 -m pip install git+https://github.com/chriszuelsdorf/basetui
 ```
 
+Or, to upgrade:
+
+```sh
+npip install --upgrade git+https://github.com/chriszuelsdorf/basetui
+```
+
 ## How to use
 
 A short example:
