@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="basetui",
-    version="0.0.1",
+    version="0.0.2",
     description="Bare-bones ncurses tui wrapper.",
     url="https://github.com/chriszuelsdorf/basetui",
     author="Chris Zuelsdorf",
