@@ -54,14 +54,18 @@ def submain(
             # Temp store then check & reload
             o_szwarn = bool(szwarn)
             szwarn, nrow, ncol = showsizewarn(stdscr, COLORSMAIN, windim)
-            logfunc(f"Resize detected, new size is {nrow}x{ncol}", 0)
+            logfunc(
+                f"Resize detected, new size is {nrow}x{ncol} and szwarn movement was {o_szwarn} -> {szwarn}",
+                0,
+            )
 
-            # Redraw if it was not acceptable but is now
-            if szwarn is True and o_szwarn is False:
+            # Redraw everything
+            if szwarn is False:
                 stdscr.clear()
                 addcursor(stdscr, buf, ncol, nrow, COLORSMAIN, COLORSSTATUSBAR)
                 stdscr.addstr(nrow - 2, 0, boxchars["HORIZ"] * ncol, COLORSMAIN)
                 supd(stdscr, " " * ncol, ncol, COLORSSTATUSBAR, COLORSSTATUSBAR)
+                logfunc("Redrew stuff")
 
             del o_szwarn  # del temp var
 
