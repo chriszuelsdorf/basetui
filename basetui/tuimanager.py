@@ -51,17 +51,21 @@ def submain(
 
         # If resized, check against windim & possibly display warning
         if inp == "KEY_RESIZE":
-            logfunc("Resize detected", 0)
-
             # Temp store then check & reload
             o_szwarn = bool(szwarn)
             szwarn, nrow, ncol = showsizewarn(stdscr, COLORSMAIN, windim)
+            logfunc(
+                f"Resize detected, new size is {nrow}x{ncol} and szwarn movement was {o_szwarn} -> {szwarn}",
+                0,
+            )
 
-            # Redraw if it was not acceptable but is now
-            if szwarn is True and o_szwarn is False:
+            # Redraw everything
+            if szwarn is False:
+                stdscr.clear()
                 addcursor(stdscr, buf, ncol, nrow, COLORSMAIN, COLORSSTATUSBAR)
                 stdscr.addstr(nrow - 2, 0, boxchars["HORIZ"] * ncol, COLORSMAIN)
                 supd(stdscr, " " * ncol, ncol, COLORSSTATUSBAR, COLORSSTATUSBAR)
+                logfunc("Redrew stuff", 0)
 
             del o_szwarn  # del temp var
 
@@ -226,7 +230,7 @@ def curses_main(
         ccfg = [int(ccf[x]) for x in ["num", "r", "g", "b"]]
         logMod.log(
             f"Creating color: {ccfg}",
-            priority=1,
+            priority=0,
         )
         curses.init_color(*ccfg)
 
@@ -241,7 +245,7 @@ def curses_main(
         bg = int(bg) if bg.isnumeric() else getattr(curses, bg)
         logMod.log(
             f"Creating color pair: {[ccf['num'], ccf['fg'], ccf['bg']]} -> {[nm, fg, bg]}",
-            priority=1,
+            priority=0,
         )
         curses.init_pair(nm, fg, bg)
         colorpairs[nm] = curses.color_pair(nm)
@@ -256,14 +260,14 @@ def curses_main(
 
     # Compose Colors
     colorinfo = {"defaults": colordefaults, "pairs": colorpairs}
-    logMod.log("Loaded colors", priority=1)
+    logMod.log("Loaded colors", priority=0)
 
     ######################
     # OTHER INITALIZATION
 
     # Box Chars
     boxchars = {"HORIZ": "─", "VERTI": "│"}
-    logMod.log("Loaded boxchars", priority=1)
+    logMod.log("Loaded boxchars", priority=0)
 
     ################
     # CURSES CONFIG
@@ -273,7 +277,7 @@ def curses_main(
     halfdelay_amt = int(config["Curses Setup"]["halfdelay"])
     curses.halfdelay(halfdelay_amt)
     logMod.log(
-        f"Loaded keypress exception delay as {halfdelay_amt/10:.1f}s", priority=1
+        f"Loaded keypress exception delay as {halfdelay_amt/10:.1f}s", priority=0
     )
 
     ##############

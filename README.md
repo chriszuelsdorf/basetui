@@ -59,7 +59,7 @@ if __name__ == "__main__":
     #           path template specified in config.ini.
     #   - your handler callable
     basetui.basetui(
-        "/Users/christopherzuelsdorf/dev/learn-lang/py3/proj04_fincli/pfcli2", handler
+        "/path/to/your/base/folder", handler
     )
 
 ```
