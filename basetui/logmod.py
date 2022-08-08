@@ -4,6 +4,7 @@ from datetime import datetime
 
 class logbuf:
     valid_levels = [0, 1, 2, 3]
+    level_descs = ["DEBUG", "INFO", "WARN", "CRITICAL"]
 
     def __init__(self, file, filter=2):
         """Init the logbuf.
@@ -35,7 +36,9 @@ class logbuf:
         if priority not in self.valid_levels:
             raise ValueError(f"Expected priority, got {priority}")
         if priority >= self.filter:
-            self.buffer.append(str(datetime.now()) + " -> " + str(text))
+            self.buffer.append(
+                f"{datetime.now()} [{self.level_descs[priority]}] -> {text}"
+            )
         if len(self.buffer) >= 100:
             self.flush()
 
