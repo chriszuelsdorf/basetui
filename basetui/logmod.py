@@ -4,7 +4,7 @@ from datetime import datetime
 
 class logbuf:
     valid_levels = [0, 1, 2, 3]
-    level_descs = ["DEBUG", "INFO", "WARN", "CRITICAL"]
+    level_descs = ["DEBUG   ", "INFO    ", "WARN    ", "CRITICAL"]
 
     def __init__(self, file, filter=2):
         """Init the logbuf.
@@ -44,7 +44,9 @@ class logbuf:
 
     def flush(self) -> None:
         """Flushes messages in the log buffer to the output file."""
-        self.buffer.append(str(datetime.now()) + " -> LOGBUF <> Flushed Log Buffer")
+        self.buffer.append(
+            str(datetime.now()) + " [META    ] -> LOGBUF <> Flushed Log Buffer"
+        )
         with open(self.file, mode="a") as f:
             for l in self.buffer:
                 if l.endswith("\n"):
