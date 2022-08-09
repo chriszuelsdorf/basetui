@@ -2,9 +2,10 @@ from setuptools import setup
 
 setup(
     name="basetui",
-    version="0.1.0",
+    version="0.0.9",
     description="Bare-bones ncurses tui wrapper.",
     url="https://github.com/chriszuelsdorf/basetui",
+    download_url="git+https://github.com/chriszuelsdorf/basetui@test/0/1/1",
     author="Chris Zuelsdorf",
     author_email="44318390+chriszuelsdorf@users.noreply.github.com",
     license="GNU General Public License v3 (GPLv3)",
